@@ -1,0 +1,307 @@
+/* @font-face {
+    font-family: player-iconfont;
+    src: url("//cytroncdn.videojj.com/asserts/iconfont/iva2-iconfont.eot");
+    src: url("//cytroncdn.videojj.com/asserts/iconfont/iva2-iconfont.eot?#iefix") format("embedded-opentype"), url("//cytroncdn.videojj.com/asserts/iconfont/iva2-iconfont.woff") format("woff"), url("//cytroncdn.videojj.com/asserts/iconfont/iva2-iconfont.ttf") format("truetype"), url("//cytroncdn.videojj.com/asserts/iconfont/iva2-iconfont.svg#iconfont") format("svg")
+} */
+@font-face {font-family: "iconfont";
+    src: url('fonts/iconfont.eot'); /* IE9*/
+    src: url('fonts/iconfont.eot#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('fonts/iconfont.woff') format('woff'), /* chrome, firefox */
+    url('fonts/iconfont.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+    url('fonts/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.player_control_iconfont {
+    font-family:"iconfont" !important;
+    font-size:28px;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    color: #fff;
+    line-height: 30px;
+    text-align: center;
+    position: relative;
+}
+.player_control_iconfont:after {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(30% 30%, hsla(0, 0%, 100%, .6), hsla(0, 0%, 100%, 0));
+    border-radius: 50%;
+    opacity: 0;
+    /*box-shadow: 0 0 6px hsla(0, 0%, 100%, .4);*/
+    transition: opacity .4s ease-in-out
+}
+.player_control_iconfont_volumn:after{
+    background: radial-gradient(30% 30%, rgba(9,209,177,.6), rgba(0,0,0,0));
+}
+
+ .player_control_iconfont:hover:after {
+    opacity: 1
+}
+#container {
+    position: relative;background: #000; z-index: 0;overflow: hidden;font-size:0;
+    width: 800px;
+}
+#video_container video{
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+/* .player_control_iconfont {
+    font-family: player-iconfont!important;
+    font-size: 20px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: .2px;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    line-height: 30px;
+    color: #fff
+} */
+
+.player_control {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 15px;
+    height: 40px;
+    background-color: rgba(48, 40, 44, .5);
+    border-radius: 4px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    z-index: 100;
+    transition: all .4s ease-in-out;
+    opacity: 0;
+}
+
+.player_control:after {
+    content: " ";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both
+}
+.player_control_play {
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin: 5px 10px;
+    cursor: pointer
+}
+.player_control_hover_time {
+    padding: 0 8px;
+    width: auto;
+    line-height: 20px;
+    text-align: center
+}
+
+ .player_control_progress {
+    position: absolute;
+    left: 105px;
+    right: 295px;
+    top: 19px;
+    padding: 0;
+    width: auto;
+    height: 2px;
+    background-color: rgba(48, 40, 44, .5)
+}
+
+/* 当前播放进度 */
+ .player_control_progress_played {
+    z-index: 5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: #09d1b1
+}
+
+ .player_control_progress_played:after,
+ .player_control_progress_played:before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: -19px;
+    width: 100%;
+    height: 19px;
+    background-color: rgba(9, 209, 177, .5);
+    opacity: 0;
+    transition: all .4s ease-in-out;
+    -webkit-transform: translateY(19px);
+    transform: translateY(19px)
+}
+
+ .player_control_progress_played:after {
+    top: 2px;
+    -webkit-transform: translateY(-19px);
+    transform: translateY(-19px)
+}
+
+/* 缓冲进度 */
+.player_control_progress_buffer {
+    z-index: 4;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: hsla(0, 0%, 100%, .2);
+}
+
+.player_control_progress_buffer:after,
+.player_control_progress_buffer:before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: -19px;
+    width: 100%;
+    height: 19px;
+    opacity: 0;
+    background-color: hsla(0, 0%, 100%, .2);
+    transition: all .4s ease-in-out;
+    -webkit-transform: translateY(19px);
+    transform: translateY(19px)
+}
+
+.player_control_progress_buffer:after {
+    top: 2px;
+    -webkit-transform: translateY(-19px);
+    transform: translateY(-19px)
+}
+
+/* 进度条总长高度 */
+.player_control_progress_total {
+    z-index: 4;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: hsla(0, 0%, 100%, .2);
+}
+/* .player_control_progress_total:after,
+.player_control_progress_total:before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: -19px;
+    width: 100%;
+    height: 19px;
+    background-color: hsla(0, 0%, 100%, .1);
+    opacity: 0.2;
+    transition: all .4s ease-in-out;
+    -webkit-transform: translateY(19px);
+    transform: translateY(19px)
+}
+
+.player_control_progress_total:after {
+    top: 2px;
+    -webkit-transform: translateY(-19px);
+    transform: translateY(-19px)
+} */
+
+.player_control_progress:hover>.player_control_progress_buffer:after,
+.player_control_progress:hover>.player_control_progress_buffer:before,
+.player_control_progress:hover>.player_control_progress_played:after,
+.player_control_progress:hover>.player_control_progress_played:before {
+    opacity: 1;
+    -webkit-transform: translate(0);
+    transform: translate(0)
+}
+.play_control_pregressText {
+    font-size: 14px;line-height: 40px;color:#fff;float:left;
+}
+
+.player_control_logo {
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+    line-height: 42px;
+}
+
+.player_control_fullscreen {
+    float: right;
+    width: 30px;
+    height: 30px;
+    margin: 5px 10px;
+    cursor: pointer
+}
+
+/* 鼠标移动到进度条上显示当前指针所在的进度和时间 */
+.player_control_hint {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: 52px;
+    font-size: 14px;
+    color: #fff;
+    background-color: rgba(48, 40, 44, .5);
+}
+
+.player_control_hint:before {
+    content: " ";
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    margin: 12px 0 0 -1px;
+    width: 2px;
+    height: 40px;
+    background: #fff
+}
+
+.player_control_hint:after {
+    content: " ";
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    margin-left: -5px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid rgba(48, 40, 44, .5)
+}
+
+/* hover/click for mouse handle */
+ .player_control_click {
+    z-index: 6;
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    top: -19px;
+    cursor: pointer
+}
+
+.video_volumn{
+    position:absolute;right:150px;top:18px;width:100px;background: #fff;
+}
+.video_volumn_head{
+    position:absolute;
+    top: -13px;
+    left: -35px;
+    color: #09d1b1;
+}
+.video_volumn_total{
+    position:absolute;width: 100%;height: 4px;background: #fff;border-radius:4px;
+    background: rgba(255,255,255,0.5);
+    overflow: hidden;
+}
+.video_volumn_box {
+    position:absolute;width: 100%;height: 4px;z-index:6;
+    cursor: pointer;
+}
+
+.video_volumn_volume {
+    position:absolute;height: 4px;background: #fff;
+    background: #09d1b1;
+    width: 0;
+}
