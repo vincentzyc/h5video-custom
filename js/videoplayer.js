@@ -27,8 +27,8 @@
         init : function() {
             // this is equal to the videoPlayer object.
             var that = this;
-            this.addSource('./frag_bunny.mp4');
-            // this.addSourceSrc('http://nettuts.s3.amazonaws.com/763_sammyJSIntro/trailer_test.mp4');
+            // this.addSource('./frag_bunny.mp4');
+            this.addSourceSrc('https://www.w3cschool.cn/statics/demosource/movie.mp4');
             // Helpful CSS trigger for JS.
             document.documentElement.className = 'js';
             // Get rid of the default controls, because we'll use our own.
